@@ -81,7 +81,7 @@ int getReadsFromReference(SettingsStructure& settings){
             correctedSequence = getReferenceSequence(referenceGenome, stoi(splittedLine[2]), stoi(splittedLine[3]), size, stoi(splittedLine[1]));
             correctedReadsFile<<">" + name + "\n" + correctedSequence + "\n";
         } else{
-            correctedReadsFile<<">" + name + "\n" + "not_corrected" + "\n";
+            correctedReadsFile<<">" + name + "\n" + splittedLine[9] + "\n";
         }
 
     }
