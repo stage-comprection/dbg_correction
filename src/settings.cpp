@@ -34,6 +34,9 @@ void SettingsStructure::loadSettingsFile(std::string& settingsFilePath){
         else if (key =="bgreatPath"){
             this->pathToBgreat = value;
         }
+        else if (key =="bowtieParserPath"){
+            this->pathToBowtieParser = value;
+        }
         else if (key =="baseFileName"){
             this->baseFileName = value;
         }

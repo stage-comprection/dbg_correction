@@ -123,8 +123,6 @@ void getCorrectedReadsFromBcalm(SettingsStructure& settings){
 
     runBowtie(settings);
 
-    getReadsFromReference(settings);
-
     vector<string> files2 {"temp_bgreat_corrected_", "temp_bowtie_corrected_"};
     outputName = "corrected_";
     concatenateFiles(settings, files2 , outputName);

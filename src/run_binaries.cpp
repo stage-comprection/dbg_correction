@@ -65,8 +65,9 @@ void runBowtie(SettingsStructure& settings){
     // Initializes command to run bowtie with desired parameters and input/output files
     string command = settings.pathToBowtie + "bowtie -f -k 1 --best -v " + to_string(settings.nAllowedMismatchesForBowtie) + " -p " +
                      to_string(settings.nCores) + " " + settings.pathToOutput + "temp_index_" + settings.baseFileName + " " +
-                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + ".fasta -S " + settings.pathToOutput + "temp_aligned_" +
-                     settings.baseFileName + " --sam-nosq";
+                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + ".fasta | " + settings.pathToBowtieParser +
+                     " " + settings.pathToOutput + "temp_bowtie_corrected_" + settings.baseFileName + " false " +
+                     settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName;
 
     // Runs command and stores state
     system(command.c_str());

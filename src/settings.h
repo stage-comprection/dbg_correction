@@ -13,6 +13,7 @@ struct SettingsStructure{
     std::string pathToBcalm = pathToProject + "code/bcalm/build/";
     std::string pathToBowtie = pathToProject + "tools/bowtie/" ;
     std::string pathToBgreat = pathToProject + "code/BGREAT/";
+    std::string pathToBowtieParser = "";
     std::string baseFileName = "";
     uint kmerSize_bcalm = 31;
     uint kmerSize_bgreat = 31;
