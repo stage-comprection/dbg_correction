@@ -15,7 +15,7 @@ BIN = $(BASEDIR)/bin
 TARGET = dbg_correction
 
 # Objects names
-OBJECTS = $(BUILD)/dbg_correction.o $(BUILD)/map_to_reference.o $(BUILD)/pipeline.o $(BUILD)/run_binaries.o $(BUILD)/settings.o $(BUILD)/utils.o
+OBJECTS = $(BUILD)/dbg_correction.o $(BUILD)/pipeline.o $(BUILD)/run_binaries.o $(BUILD)/settings.o $(BUILD)/utils.o
 
 # Rules
 
