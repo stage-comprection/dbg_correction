@@ -66,8 +66,10 @@ void runBowtie(SettingsStructure& settings){
     string command = settings.pathToBowtie + "bowtie -f -k 1 --best -v " + to_string(settings.nAllowedMismatchesForBowtie) + " -p " +
                      to_string(settings.nCores) + " " + settings.pathToOutput + "temp_index_" + settings.baseFileName + " " +
                      settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + ".fasta | " + settings.pathToBowtieParser +
-                     " " + settings.pathToOutput + "temp_bowtie_corrected_" + settings.baseFileName + " false " +
-                     settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName;
+                     "bowtie_to_reads  " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " false " +
+                     settings.pathToOutput + "temp_bowtie_corrected_" + settings.baseFileName;
+
+    cout<<command<<endl;
 
     // Runs command and stores state
     system(command.c_str());
