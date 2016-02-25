@@ -22,7 +22,7 @@ OBJECTS = $(BUILD)/dbg_correction.o $(BUILD)/pipeline.o $(BUILD)/run_binaries.o 
 all: init $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(BIN)/$(TARGET) $^
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(BIN)/$(TARGET) $^
 	cp $(BIN)/$(TARGET) ../../binaries/$(TARGET)
 
 $(BUILD)/%.o: $(SRC)/%.cpp
