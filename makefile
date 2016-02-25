@@ -2,8 +2,8 @@
 CC = g++
 OPTCFLAGS= -Ofast -march=native 
 CFLAGS= -Wall -Werror -std=c++11 -I $(LIBPATH) $(OPTCFLAGS)
-LDFLAGS= -pthread
-LIBPATH = ../utils/src
+LDFLAGS= -pthread -static-libstdc++
+LIBPATH = ../utils/src 
 
 # Directory organisation
 BASEDIR = .
