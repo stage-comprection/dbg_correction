@@ -109,6 +109,8 @@ void cleanupTempFiles(SettingsStructure& settings){
 // Pipeline per se, runs all commands and checks if they executed correctly
 void getCorrectedReadsFromBcalm(SettingsStructure& settings){
 
+    cout<<settings.kmerSize_bcalm<<endl;
+
     getUnitigs(settings);
 
     formatBglueOutput(settings);
