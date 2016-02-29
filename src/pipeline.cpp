@@ -55,17 +55,22 @@ void concatenateFiles(SettingsStructure& settings, vector<string>& inputFileName
     // Opens input files and write them into the output file
     string tempFilePath, line;
     ifstream tempInput;
+    uint lineCount;
 
     for (uint i=0; i<inputFileNames.size(); ++i){
 
-        settings.statsFile << inputFileNames[i] << ": " <<to_string(inputFileNames.size() / 2)<<"\n";
+        lineCount = 0;
+        settings.statsFile << inputFileNames[i] << ": ";
 
         tempFilePath = settings.pathToOutput + inputFileNames[i] + settings.baseFileName;
         tempInput.open(tempFilePath.c_str());
 
         while(getline(tempInput, line)){
             concatenatedOutput<<line<<endl;
+            ++lineCount;
         }
+
+        settings.statsFile << to_string(lineCount / 2) << "\n";
 
         tempInput.close();
     }
