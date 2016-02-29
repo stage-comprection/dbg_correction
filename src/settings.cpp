@@ -7,7 +7,7 @@ void SettingsStructure::loadSettingsFile(std::string& settingsFilePath){
     std::ifstream settingsFile;
     settingsFile.open(settingsFilePath);
 
-    std::string line, key, value;
+    std::string line, key, value, statsFilePath;
     std::vector<std::string> splittedLine;
 
     while(std::getline(settingsFile, line)){
@@ -63,6 +63,9 @@ void SettingsStructure::loadSettingsFile(std::string& settingsFilePath){
         }
 
     }
+
+    statsFilePath = this->pathToOutput + "correction_stats.txt";
+    this->statsFile.open(statsFilePath.c_str());
 
     settingsFile.close();
 }

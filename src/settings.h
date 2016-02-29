@@ -15,6 +15,7 @@ struct SettingsStructure{
     std::string pathToBgreat = pathToProject + "code/BGREAT/";
     std::string pathToBowtieParser = "";
     std::string baseFileName = "";
+
     uint kmerSize_bcalm = 31;
     uint kmerSize_bgreat = 31;
     uint abundanceThreshold_bcalm = 5;
@@ -22,6 +23,8 @@ struct SettingsStructure{
     uint nCores = 6;
     uint nAllowedMismatchesForBowtie = 3;
     uint readLength = 98;
+
+    std::ofstream statsFile;
 
     // Loads settings from settings file
     void loadSettingsFile(std::string& settingsFilePath);

@@ -58,6 +58,8 @@ void concatenateFiles(SettingsStructure& settings, vector<string>& inputFileName
 
     for (uint i=0; i<inputFileNames.size(); ++i){
 
+        settings.statsFile << inputFileNames[i] << ": " <<to_string(inputFileNames.size() / 2)<<"\n";
+
         tempFilePath = settings.pathToOutput + inputFileNames[i] + settings.baseFileName;
         tempInput.open(tempFilePath.c_str());
 
@@ -109,8 +111,6 @@ void cleanupTempFiles(SettingsStructure& settings){
 // Pipeline per se, runs all commands and checks if they executed correctly
 void getCorrectedReadsFromBcalm(SettingsStructure& settings){
 
-    cout<<settings.kmerSize_bcalm<<endl;
-
     getUnitigs(settings);
 
     formatBglueOutput(settings);
@@ -130,5 +130,6 @@ void getCorrectedReadsFromBcalm(SettingsStructure& settings){
     concatenateFiles(settings, files2 , outputName);
 
     cleanupTempFiles(settings);
+    settings.statsFile.close();
 
 }
