@@ -7,7 +7,7 @@ void SettingsStructure::loadSettingsFile(std::string& settingsFilePath){
     std::ifstream settingsFile;
     settingsFile.open(settingsFilePath);
 
-    std::string line, key, value, statsFilePath;
+    std::string line, key, value;
     std::vector<std::string> splittedLine;
 
     while(std::getline(settingsFile, line)){
@@ -40,17 +40,11 @@ void SettingsStructure::loadSettingsFile(std::string& settingsFilePath){
         else if (key =="baseFileName"){
             this->baseFileName = value;
         }
-        else if (key =="kmerSizeBgreat"){
-            this->kmerSize_bgreat = std::stoi(value);
+        else if (key =="kmerSize"){
+            this->kmerSize = std::stoi(value);
         }
-        else if (key =="kmerSizeBcalm"){
-            this->kmerSize_bcalm = std::stoi(value);
-        }
-        else if (key =="abundanceBgreat"){
-            this->abundanceThreshold_bgreat = std::stoi(value);
-        }
-        else if (key =="abundanceBcalm"){
-            this->abundanceThreshold_bcalm = std::stoi(value);
+        else if (key =="abundance"){
+            this->abundanceThreshold = std::stoi(value);
         }
         else if (key =="nCores"){
             this->nCores = std::stoi(value);
@@ -63,9 +57,6 @@ void SettingsStructure::loadSettingsFile(std::string& settingsFilePath){
         }
 
     }
-
-    statsFilePath = this->pathToOutput + "correction_stats.txt";
-    this->statsFile.open(statsFilePath.c_str());
 
     settingsFile.close();
 }

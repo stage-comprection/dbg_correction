@@ -127,7 +127,8 @@ void getCorrectedReadsFromBcalm(SettingsStructure& settings){
     outputName = "corrected_";
     concatenateFiles(settings, files2 , outputName);
 
-    cleanupTempFiles(settings);
+//    cleanupTempFiles(settings);
+
     settings.statsFile.close();
 
 }

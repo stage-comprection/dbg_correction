@@ -9,8 +9,8 @@ void runBgreat(SettingsStructure& settings){
     cout<<"\nRunning Bgreat ... \n";
 
     // Initializes command to run bgreat in correction mode (-c) with desired path and parameters
-    string command = settings.pathToBgreat + "bgreat -r " + settings.pathToReads + settings.baseFileName + ".fasta -k " + to_string(settings.kmerSize_bgreat) +
-                     " -g " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " -m " + to_string(settings.abundanceThreshold_bgreat) +
+    string command = settings.pathToBgreat + "bgreat -r " + settings.pathToReads + settings.baseFileName + ".fasta -k " + to_string(settings.kmerSize) +
+                     " -g " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " -m " + to_string(settings.abundanceThreshold) +
                      " -c -t " + to_string(settings.nCores) + " -f " + settings.pathToOutput + "temp_bgreat_corrected_" + settings.baseFileName + " -o " +
                      settings.pathToOutput + "temp_bgreat_noOverlap_" + settings.baseFileName + " -a " + settings.pathToOutput + "temp_bgreat_noAlign_" +
                      settings.baseFileName + " 1>" + settings.pathToOutput + "logs_bgreat.txt" + " 2>/dev/null";
@@ -68,8 +68,8 @@ void runBcalm(SettingsStructure& settings){
     cout<<"\nRunning Bcalm ... \n";
 
     // Initializes command to run bcalm on original reads with desired input/output files
-    string command = settings.pathToBcalm + "bcalm -in " + settings.pathToReads + settings.baseFileName + ".fasta -k " + to_string(settings.kmerSize_bcalm) +
-                     " -abundance " + to_string(settings.abundanceThreshold_bcalm) + " -out " + settings.pathToOutput + "temp_bcalm_" +
+    string command = settings.pathToBcalm + "bcalm -in " + settings.pathToReads + settings.baseFileName + ".fasta -k " + to_string(settings.kmerSize) +
+                     " -abundance " + to_string(settings.abundanceThreshold) + " -out " + settings.pathToOutput + "temp_bcalm_" +
                      settings.baseFileName + " -verbose 0 -nb-cores " + to_string(settings.nCores) + " 1>" + settings.pathToOutput + "logs_bcalm.txt" +
                      " 2>/dev/null";
 
@@ -88,7 +88,7 @@ void runBglue(SettingsStructure& settings){
 
     // Initializes command to run bglue on bcalm output with desired input/output files
     string command = settings.pathToBcalm + "bglue -in " + settings.pathToOutput + "temp_bcalm_" + settings.baseFileName + ".h5 -verbose 0 -k " +
-                     to_string(settings.kmerSize_bcalm) + " -nb-cores " + to_string(settings.nCores) + " -out " + settings.pathToOutput +
+                     to_string(settings.kmerSize) + " -nb-cores " + to_string(settings.nCores) + " -out " + settings.pathToOutput +
                      "temp_bglue_" + settings.baseFileName + " 1>" + settings.pathToOutput + "logs_bglue.txt" + " 2>/dev/null";
 
     // Runs command and stores state
