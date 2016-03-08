@@ -6,7 +6,7 @@ using namespace std;
 // Runs bgreat to align reads on multiple unitigs
 void runBgreat(SettingsStructure& settings){
 
-    cout<<"\nRunning Bgreat ... \n";
+    cout<<"\n    ** Running Bgreat ... \n";
 
     // Initializes command to run bgreat in correction mode (-c) with desired path and parameters
     string command = settings.pathToBgreat + "bgreat -r " + settings.pathToReads + settings.baseFileName + ".fasta -k " + to_string(settings.kmerSize) +
@@ -26,7 +26,7 @@ void runBgreat(SettingsStructure& settings){
 // Builds bowtie index from reference genome (DB graph unitigs)
 void buildBowtieIndex(SettingsStructure& settings){
 
-    cout<<"\nBuilding bowtie index ... \n";
+    cout<<"\n    ** Building bowtie index ... \n";
 
     // Initializes command to build the bowtie index - see bowtie manual
     string command = settings.pathToBowtie + "bowtie-build " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " " +
@@ -44,7 +44,7 @@ void buildBowtieIndex(SettingsStructure& settings){
 // Runs bowtie to align reads on DB graph unitigs
 void runBowtie(SettingsStructure& settings){
 
-    cout<<"\nRunning bowtie ... ";
+    cout<<"\n    ** Running Bowtie ... \n";
 
     // Initializes command to run bowtie with desired parameters and input/output files
     string command = settings.pathToBowtie + "bowtie -f -k 1 --best -v " + to_string(settings.nAllowedMismatchesForBowtie) + " -p " +
@@ -65,7 +65,7 @@ void runBowtie(SettingsStructure& settings){
 // Runs Bcalm to generate DB graph from original reads
 void runBcalm(SettingsStructure& settings){
 
-    cout<<"\nRunning Bcalm ... \n";
+    cout<<"\n    ** Running Bcalm ... \n";
 
     // Initializes command to run bcalm on original reads with desired input/output files
     string command = settings.pathToBcalm + "bcalm -in " + settings.pathToReads + settings.baseFileName + ".fasta -k " + to_string(settings.kmerSize) +
@@ -84,7 +84,7 @@ void runBcalm(SettingsStructure& settings){
 // Runs Bglue to generate unitigs from Bcalm output
 void runBglue(SettingsStructure& settings){
 
-    cout<<"\nRunning Bglue... \n";
+    cout<<"\n    ** Running Bglue... \n";
 
     // Initializes command to run bglue on bcalm output with desired input/output files
     string command = settings.pathToBcalm + "bglue -in " + settings.pathToOutput + "temp_bcalm_" + settings.baseFileName + ".h5 -verbose 0 -k " +
