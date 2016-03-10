@@ -86,7 +86,7 @@ void runBowtie2(SettingsStructure& settings){
     cout<<"\n    ** Running Bowtie ... \n";
 
     // Initializes command to run bowtie with desired parameters and input/output files
-    string command = settings.pathToBowtie2 + "bowtie -f --reorder -p " +
+    string command = settings.pathToBowtie2 + "bowtie2 -f --reorder -p " +
                      to_string(settings.nCores) + " -x " + settings.pathToOutput + "temp_index_" + settings.baseFileName + " " +
                      settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + ".fasta 2>" + settings.pathToOutput + "logs_bowtie.txt" +
                      " --no-head --no-sq | " +
