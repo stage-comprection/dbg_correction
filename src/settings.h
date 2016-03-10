@@ -12,6 +12,7 @@ struct SettingsStructure{
     std::string pathToReads = pathToProject + "data/reads/";
     std::string pathToBcalm = pathToProject + "code/bcalm/build/";
     std::string pathToBowtie = pathToProject + "tools/bowtie/" ;
+    std::string pathToBowtie2 = pathToProject + "tools/bowtie2/" ;
     std::string pathToBgreat = pathToProject + "code/BGREAT/";
     std::string pathToBowtieParser = "";
     std::string baseFileName = "";
@@ -21,6 +22,8 @@ struct SettingsStructure{
     uint nCores = 6;
     uint nAllowedMismatchesForBowtie = 3;
     uint readLength = 98;
+
+    std::string bowtieMode = "fast";
 
     // Loads settings from settings file
     void loadSettingsFile(std::string& settingsFilePath);

@@ -119,9 +119,9 @@ void getCorrectedReadsFromBcalm(SettingsStructure& settings){
     string outputName = "temp_bgreat_uncorrected_";
     concatenateFiles(settings, files , outputName);
 
-    buildBowtieIndex(settings);
+    buildBowtie2Index(settings);
 
-    runBowtie(settings);
+    runBowtie2(settings);
 
     vector<string> files2 {"temp_bgreat_corrected_", "temp_bowtie_corrected_"};
     outputName = "corrected_";
