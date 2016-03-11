@@ -128,7 +128,7 @@ void runBwa(SettingsStructure& settings){
     string command = settings.pathToBwa + "bwa mem -t " +
                      to_string(settings.nCores) + " " + settings.pathToOutput + "temp_index_" + settings.baseFileName + " " +
                      settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + ".fasta 2>" + settings.pathToOutput + "logs_aligner.txt" +
-                     " --no-head --no-sq | " +
+                     " | " +
                      settings.pathToBowtieParser + "bowtie_to_reads  " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " false " +
                      settings.pathToOutput + "temp_aligner_corrected_" + settings.baseFileName;
 
