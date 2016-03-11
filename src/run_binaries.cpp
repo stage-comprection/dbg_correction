@@ -107,9 +107,11 @@ void buildBwaIndex(SettingsStructure& settings){
     cout<<"\n    ** Building BWAindex ... \n";
 
     // Initializes command to build the bowtie index - see bowtie manual
-    string command = settings.pathToBwa + "bwa index -t" + to_string(settings.nCores) + settings.pathToOutput + "temp_formatted_bglue_" +
-                     settings.baseFileName + " " + settings.pathToOutput + "temp_index_" + settings.baseFileName +
+    string command = settings.pathToBwa + "bwa index -p " + settings.pathToOutput + "temp_index_" + settings.baseFileName + " " +
+                     settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " " +
                      " 1>" + settings.pathToOutput + "logs_aligner_index.txt" + " 2>/dev/null";
+
+    cout<<command<<"\n\n";
 
     // Runs command and stores state
     system(command.c_str());
