@@ -119,11 +119,25 @@ void getCorrectedReadsFromBcalm(SettingsStructure& settings){
     string outputName = "temp_bgreat_uncorrected_";
     concatenateFiles(settings, files , outputName);
 
-    buildBowtie2Index(settings);
+    if (settings.aligner == "bowtie"){
 
-    runBowtie2(settings);
+        buildBowtieIndex(settings);
+        runBowtie(settings);
 
-    vector<string> files2 {"temp_bgreat_corrected_", "temp_bowtie_corrected_"};
+    } else if (settings.aligner == "bowtie2"){
+
+        buildBowtie2Index(settings);
+        runBowtie2(settings);
+
+    } else if (settings.aligner == "bwa"){
+
+        buildBwaIndex(settings);
+        runBwa(settings);
+    }
+
+
+
+    vector<string> files2 {"temp_bgreat_corrected_", "temp_aligner_corrected_"};
     outputName = "corrected_";
     concatenateFiles(settings, files2 , outputName);
 

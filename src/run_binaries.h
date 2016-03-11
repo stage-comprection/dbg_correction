@@ -12,11 +12,17 @@ void buildBowtieIndex(SettingsStructure& settings);
 // Runs bowtie to align reads on DB graph unitigs
 void runBowtie(SettingsStructure& settings);
 
-// Builds bowtie index from reference genome (DB graph unitigs)
+// Builds bowtie 2 index from reference genome (DB graph unitigs)
 void buildBowtie2Index(SettingsStructure& settings);
 
-// Runs bowtie to align reads on DB graph unitigs
+// Runs bowtie 2 to align reads on DB graph unitigs
 void runBowtie2(SettingsStructure& settings);
+
+// Builds BWA index from reference genome (DB graph unitigs)
+void buildBwaIndex(SettingsStructure& settings);
+
+// Runs BWA to align reads on DB graph unitigs
+void runBwa(SettingsStructure& settings);
 
 // Runs Bcalm to generate DB graph from original reads
 void runBcalm(SettingsStructure& settings);

@@ -34,6 +34,9 @@ void SettingsStructure::loadSettingsFile(std::string& settingsFilePath){
         else if (key =="bowtie2Path"){
             this->pathToBowtie2 = value;
         }
+        else if (key =="bwaPath"){
+            this->pathToBwa = value;
+        }
         else if (key =="bgreatPath"){
             this->pathToBgreat = value;
         }
@@ -56,7 +59,10 @@ void SettingsStructure::loadSettingsFile(std::string& settingsFilePath){
             this->nAllowedMismatchesForBowtie = std::stoi(value);
         }
         else if (key =="readLength"){
-            this->readLength =std::stoi(value);
+            this->readLength = std::stoi(value);
+        }
+        else if (key =="aligner"){
+            this->aligner = value;
         }
 
     }

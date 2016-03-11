@@ -30,7 +30,7 @@ void buildBowtieIndex(SettingsStructure& settings){
 
     // Initializes command to build the bowtie index - see bowtie manual
     string command = settings.pathToBowtie + "bowtie-build " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " " +
-                     settings.pathToOutput + "temp_index_" + settings.baseFileName + " 1>" + settings.pathToOutput + "logs_bowtie_index.txt" +
+                     settings.pathToOutput + "temp_index_" + settings.baseFileName + " 1>" + settings.pathToOutput + "logs_aligner_index.txt" +
                      " 2>/dev/null";
 
     // Runs command and stores state
@@ -49,10 +49,10 @@ void runBowtie(SettingsStructure& settings){
     // Initializes command to run bowtie with desired parameters and input/output files
     string command = settings.pathToBowtie + "bowtie -f -k 1 --best -v " + to_string(settings.nAllowedMismatchesForBowtie) + " -p " +
                      to_string(settings.nCores) + " " + settings.pathToOutput + "temp_index_" + settings.baseFileName + " " +
-                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + ".fasta 2>" + settings.pathToOutput + "logs_bowtie.txt" +
+                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + ".fasta 2>" + settings.pathToOutput + "logs_aligner.txt" +
                      " -S --sam-nohead --sam-nosq | " +
                      settings.pathToBowtieParser + "bowtie_to_reads  " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " false " +
-                     settings.pathToOutput + "temp_bowtie_corrected_" + settings.baseFileName;
+                     settings.pathToOutput + "temp_aligner_corrected_" + settings.baseFileName;
 
     // Runs command and stores state
     system(command.c_str());
@@ -65,11 +65,11 @@ void runBowtie(SettingsStructure& settings){
 // Builds bowtie index from reference genome (DB graph unitigs)
 void buildBowtie2Index(SettingsStructure& settings){
 
-    cout<<"\n    ** Building bowtie index ... \n";
+    cout<<"\n    ** Building bowtie 2 index ... \n";
 
     // Initializes command to build the bowtie index - see bowtie manual
     string command = settings.pathToBowtie2 + "bowtie2-build -f " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " " +
-                     settings.pathToOutput + "temp_index_" + settings.baseFileName + " 1>" + settings.pathToOutput + "logs_bowtie_index.txt" +
+                     settings.pathToOutput + "temp_index_" + settings.baseFileName + " 1>" + settings.pathToOutput + "logs_aligner_index.txt" +
                      " 2>/dev/null";
 
     // Runs command and stores state
@@ -83,15 +83,54 @@ void buildBowtie2Index(SettingsStructure& settings){
 // Runs bowtie to align reads on DB graph unitigs
 void runBowtie2(SettingsStructure& settings){
 
-    cout<<"\n    ** Running Bowtie ... \n";
+    cout<<"\n    ** Running Bowtie 2 ... \n";
 
     // Initializes command to run bowtie with desired parameters and input/output files
     string command = settings.pathToBowtie2 + "bowtie2 -f --very-sensitive -p " +
                      to_string(settings.nCores) + " -x " + settings.pathToOutput + "temp_index_" + settings.baseFileName + " " +
-                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + ".fasta 2>" + settings.pathToOutput + "logs_bowtie.txt" +
+                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + ".fasta 2>" + settings.pathToOutput + "logs_aligner.txt" +
                      " --no-head --no-sq | " +
                      settings.pathToBowtieParser + "bowtie_to_reads  " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " false " +
-                     settings.pathToOutput + "temp_bowtie_corrected_" + settings.baseFileName;
+                     settings.pathToOutput + "temp_aligner_corrected_" + settings.baseFileName;
+
+    // Runs command and stores state
+    system(command.c_str());
+
+}
+
+
+
+
+// Builds bowtie index from reference genome (DB graph unitigs)
+void buildBwaIndex(SettingsStructure& settings){
+
+    cout<<"\n    ** Building BWAindex ... \n";
+
+    // Initializes command to build the bowtie index - see bowtie manual
+    string command = settings.pathToBwa + "bwa index -t" + to_string(settings.nCores) + settings.pathToOutput + "temp_formatted_bglue_" +
+                     settings.baseFileName + " " + settings.pathToOutput + "temp_index_" + settings.baseFileName +
+                     " 1>" + settings.pathToOutput + "logs_aligner_index.txt" + " 2>/dev/null";
+
+    // Runs command and stores state
+    system(command.c_str());
+
+}
+
+
+
+
+// Runs bowtie to align reads on DB graph unitigs
+void runBwa(SettingsStructure& settings){
+
+    cout<<"\n    ** Running BWA ... \n";
+
+    // Initializes command to run bowtie with desired parameters and input/output files
+    string command = settings.pathToBwa + "bwa mem -t " +
+                     to_string(settings.nCores) + " " + settings.pathToOutput + "temp_index_" + settings.baseFileName + " " +
+                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + ".fasta 2>" + settings.pathToOutput + "logs_aligner.txt" +
+                     " --no-head --no-sq | " +
+                     settings.pathToBowtieParser + "bowtie_to_reads  " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " false " +
+                     settings.pathToOutput + "temp_aligner_corrected_" + settings.baseFileName;
 
     // Runs command and stores state
     system(command.c_str());
