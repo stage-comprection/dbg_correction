@@ -109,15 +109,15 @@ void cleanupTempFiles(SettingsStructure& settings){
 // Pipeline per se, runs all commands and checks if they executed correctly
 void getCorrectedReadsFromBcalm(SettingsStructure& settings){
 
-//    getUnitigs(settings);
+    getUnitigs(settings);
 
-//    formatBglueOutput(settings);
+    formatBglueOutput(settings);
 
-//    runBgreat(settings);
+    runBgreat(settings);
 
-//    vector<string> files {"temp_bgreat_noAlign_", "temp_bgreat_noOverlap_"};
+    vector<string> files {"temp_bgreat_noAlign_", "temp_bgreat_noOverlap_"};
     string outputName = "temp_bgreat_uncorrected_";
-//    concatenateFiles(settings, files , outputName);
+    concatenateFiles(settings, files , outputName);
 
     if (settings.aligner == "bowtie"){
 
@@ -141,6 +141,6 @@ void getCorrectedReadsFromBcalm(SettingsStructure& settings){
     outputName = "corrected_";
     concatenateFiles(settings, files2 , outputName);
 
-//    cleanupTempFiles(settings);
+    cleanupTempFiles(settings);
 
 }
