@@ -115,10 +115,6 @@ void getCorrectedReadsFromBcalm(SettingsStructure& settings){
 
     runBgreat(settings);
 
-    vector<string> files {"temp_bgreat_noAlign_", "temp_bgreat_noOverlap_"};
-    string outputName = "temp_bgreat_uncorrected_";
-    concatenateFiles(settings, files , outputName);
-
     if (settings.aligner == "bowtie"){
 
         buildBowtieIndex(settings);
@@ -135,12 +131,10 @@ void getCorrectedReadsFromBcalm(SettingsStructure& settings){
         runBwa(settings);
     }
 
-
-
     vector<string> files2 {"temp_bgreat_corrected_", "temp_aligner_corrected_"};
-    outputName = "corrected_";
+    string outputName = "corrected_";
     concatenateFiles(settings, files2 , outputName);
 
-    cleanupTempFiles(settings);
+//    cleanupTempFiles(settings);
 
 }

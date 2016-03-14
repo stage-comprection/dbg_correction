@@ -12,7 +12,7 @@ void runBgreat(SettingsStructure& settings){
     string command = settings.pathToBgreat + "bgreat -r " + settings.pathToReads + settings.baseFileName + ".fasta -k " + to_string(settings.kmerSize) +
                      " -g " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " -m " + to_string(settings.abundanceThreshold) +
                      " -c -t " + to_string(settings.nCores) + " -f " + settings.pathToOutput + "temp_bgreat_corrected_" + settings.baseFileName + " -o " +
-                     settings.pathToOutput + "temp_bgreat_noOverlap_" + settings.baseFileName + " -a " + settings.pathToOutput + "temp_bgreat_noAlign_" +
+                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + " -a " + settings.pathToOutput + "temp_bgreat_uncorrected_" +
                      settings.baseFileName + " 1>" + settings.pathToOutput + "logs_bgreat.txt" + " 2>/dev/null";
 
     // Runs command and stores state
@@ -49,7 +49,7 @@ void runBowtie(SettingsStructure& settings){
     // Initializes command to run bowtie with desired parameters and input/output files
     string command = settings.pathToBowtie + "bowtie -f -k 1 --best -v " + to_string(settings.nAllowedMismatchesForBowtie) + " -p " +
                      to_string(settings.nCores) + " " + settings.pathToOutput + "temp_index_" + settings.baseFileName + " " +
-                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + ".fasta 2>" + settings.pathToOutput + "logs_aligner.txt" +
+                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + " 2>" + settings.pathToOutput + "logs_aligner.txt" +
                      " -S --sam-nohead --sam-nosq | " +
                      settings.pathToBowtieParser + "bowtie_to_reads  " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " false " +
                      settings.pathToOutput + "temp_aligner_corrected_" + settings.baseFileName;
@@ -88,7 +88,7 @@ void runBowtie2(SettingsStructure& settings){
     // Initializes command to run bowtie with desired parameters and input/output files
     string command = settings.pathToBowtie2 + "bowtie2 -f --very-sensitive -p " +
                      to_string(settings.nCores) + " -x " + settings.pathToOutput + "temp_index_" + settings.baseFileName + " " +
-                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + ".fasta 2>" + settings.pathToOutput + "logs_aligner.txt" +
+                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + " 2>" + settings.pathToOutput + "logs_aligner.txt" +
                      " --no-head --no-sq | " +
                      settings.pathToBowtieParser + "bowtie_to_reads  " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " false " +
                      settings.pathToOutput + "temp_aligner_corrected_" + settings.baseFileName;
@@ -125,11 +125,11 @@ void runBwa(SettingsStructure& settings){
     cout<<"\n    ** Running BWA ... \n";
 
     // Initializes command to run bowtie with desired parameters and input/output files
-    string command = settings.pathToBwa + "bwa mem -t " +
+    string command = settings.pathToBwa + "bwa mem -L 10 -t " +
                      to_string(settings.nCores) + " " + settings.pathToOutput + "temp_index_" + settings.baseFileName + " " +
-                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + ".fasta 2>" + settings.pathToOutput + "logs_aligner.txt" +
+                     settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + " 2>" + settings.pathToOutput + "logs_aligner.txt" +
                      " | " +
-                     settings.pathToBowtieParser + "bowtie_to_reads  " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " false " +
+                     settings.pathToBowtieParser + "bowtie_to_reads " + settings.pathToOutput + "temp_formatted_bglue_" + settings.baseFileName + " false " +
                      settings.pathToOutput + "temp_aligner_corrected_" + settings.baseFileName;
 
     // Runs command and stores state
