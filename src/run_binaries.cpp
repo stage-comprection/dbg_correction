@@ -125,7 +125,7 @@ void runBwa(SettingsStructure& settings){
     cout<<"\n    ** Running BWA ... \n";
 
     // Initializes command to run bowtie with desired parameters and input/output files
-    string command = settings.pathToBwa + "bwa mem -L 10 -t " +
+    string command = settings.pathToBwa + "bwa mem -L 20 -t " +
                      to_string(settings.nCores) + " " + settings.pathToOutput + "temp_index_" + settings.baseFileName + " " +
                      settings.pathToOutput + "temp_bgreat_uncorrected_" + settings.baseFileName + " 2>" + settings.pathToOutput + "logs_aligner.txt" +
                      " | " +

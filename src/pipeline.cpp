@@ -135,6 +135,6 @@ void getCorrectedReadsFromBcalm(SettingsStructure& settings){
     string outputName = "corrected_";
     concatenateFiles(settings, files2 , outputName);
 
-//    cleanupTempFiles(settings);
+    cleanupTempFiles(settings);
 
 }
